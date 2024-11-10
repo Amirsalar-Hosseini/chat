@@ -1,3 +1,18 @@
+# Celery beat schedule file
+celerybeat-schedule
+
+# Redis dump file
+dump.rdb
+
+# Any other cache or temporary files
+*.pyc
+__pycache__/
+*.log
+
+# Iditor config
+.idea/
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

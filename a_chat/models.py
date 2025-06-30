@@ -6,7 +6,7 @@ import os
 
 
 class ChatGroup(models.Model):
-    group_name = models.CharField(max_length=120, unique=True, default=shortuuid.uuid)
+    group_name = models.CharField(max_length=120, unique=True)
     groupchat_name = models.CharField(max_length=128, null=True, blank=True)
     admin = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='groupchats')
     users_online = models.ManyToManyField(User, related_name="online_in_groups", blank=True)
@@ -17,6 +17,10 @@ class ChatGroup(models.Model):
     def __str__(self):
         return self.group_name
 
+    def save(self, *args, **kwargs):
+        if not self.group_name:
+            self.group_name = shortuuid.uuid()
+        return super().save(*args, **kwargs)
 
 
 class GroupMessage(models.Model):
